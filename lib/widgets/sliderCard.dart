@@ -51,7 +51,7 @@ class _SliderCardState extends State<SliderCard>
       ).animate(_animationController),
       child: AnimatedContainer(
         duration: Duration(
-          seconds: 2,
+          seconds: 1,
         ),
         width: mediaQuery.size.width * this.widget.width,
         height: mediaQuery.size.width * this.widget.width,
@@ -76,7 +76,10 @@ class _SliderCardState extends State<SliderCard>
               ),
               Text(
                 this.widget.title,
-                style: TextStyle(color: widget.textColor, fontSize: 20),
+                style: TextStyle(
+                  color: widget.textColor,
+                  fontSize: 20,
+                ),
               ),
             ],
           ),

@@ -31,9 +31,7 @@ class _CustomSliderState extends State<CustomSlider> {
                 widget.list[i].width * widget.mediaQuery.size.width / 2,
             duration: Duration(seconds: 3),
           ));
-          setState(() {
-            print(items.length);
-          });
+          setState(() {});
         } else {
           //Other Widgets
           if (i < centerIndex) {
@@ -52,9 +50,7 @@ class _CustomSliderState extends State<CustomSlider> {
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
               duration: Duration(seconds: 3),
             ));
-            setState(() {
-              print(items.length);
-            });
+            setState(() {});
           } else {
             widget.list[i] = SliderCard(
               icon: widget.list[i].icon,
@@ -75,9 +71,7 @@ class _CustomSliderState extends State<CustomSlider> {
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
                   duration: Duration(seconds: 3),
                 ));
-            setState(() {
-              print(items.length);
-            });
+            setState(() {});
           }
         }
       } else {
@@ -168,9 +162,7 @@ class _CustomSliderState extends State<CustomSlider> {
                 widget.list[i].width * widget.mediaQuery.size.width / 2,
             duration: Duration(seconds: 3),
           ));
-          setState(() {
-            print(items.length);
-          });
+          setState(() {});
         } else {
           //Other Widgets
           if (i < centerIndex) {
@@ -189,9 +181,7 @@ class _CustomSliderState extends State<CustomSlider> {
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
               duration: Duration(seconds: 3),
             ));
-            setState(() {
-              print(items.length);
-            });
+            setState(() {});
           } else {
             widget.list[i] = SliderCard(
               icon: widget.list[i].icon,
@@ -212,9 +202,7 @@ class _CustomSliderState extends State<CustomSlider> {
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
                   duration: Duration(seconds: 3),
                 ));
-            setState(() {
-              print(items.length);
-            });
+            setState(() {});
           }
         }
       } else {
@@ -309,9 +297,7 @@ class _CustomSliderState extends State<CustomSlider> {
                 widget.list[i].width * widget.mediaQuery.size.width / 2,
             duration: Duration(seconds: 3),
           ));
-          setState(() {
-            print(items.length);
-          });
+          setState(() {});
         } else {
           //Other Widgets
           if (i < centerIndex) {
@@ -330,9 +316,7 @@ class _CustomSliderState extends State<CustomSlider> {
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
               duration: Duration(seconds: 3),
             ));
-            setState(() {
-              print(items.length);
-            });
+            setState(() {});
           } else {
             widget.list[i] = SliderCard(
               icon: widget.list[i].icon,
@@ -353,9 +337,7 @@ class _CustomSliderState extends State<CustomSlider> {
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
                   duration: Duration(seconds: 3),
                 ));
-            setState(() {
-              print(items.length);
-            });
+            setState(() {});
           }
         }
       } else {
