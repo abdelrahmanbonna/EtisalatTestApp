@@ -57,7 +57,7 @@ class _SliderCardState extends State<SliderCard>
         height: mediaQuery.size.width * this.widget.width,
         decoration: BoxDecoration(
           color: this.widget.color,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
