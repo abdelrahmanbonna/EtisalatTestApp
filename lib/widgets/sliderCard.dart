@@ -4,11 +4,7 @@ class SliderCard extends StatefulWidget {
   final IconData icon;
   final String title;
   final Color color, textColor, iconColor;
-  final double width,
-      animationStartOffsetX,
-      animationStartOffsetY,
-      animationEndOffsetX,
-      animationEndOffsetY;
+  final double widthScale, animationStartOffsetX, animationEndOffsetX;
   SliderCard(
       {@required this.icon,
       @required this.color,
@@ -16,10 +12,8 @@ class SliderCard extends StatefulWidget {
       @required this.textColor,
       @required this.iconColor,
       this.animationStartOffsetX,
-      this.animationStartOffsetY,
       this.animationEndOffsetX,
-      this.animationEndOffsetY,
-      this.width = 0.5});
+      this.widthScale = 0.5});
   @override
   _SliderCardState createState() => _SliderCardState();
 }
@@ -44,45 +38,39 @@ class _SliderCardState extends State<SliderCard>
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
-    return SlideTransition(
-      position: Tween<Offset>(
-        begin: Offset.zero,
-        end: const Offset(1.5, 0.0), //TODO change to real offsets
-      ).animate(_animationController),
-      child: AnimatedContainer(
-        duration: Duration(
-          seconds: 1,
-        ),
-        width: mediaQuery.size.width * this.widget.width,
-        height: mediaQuery.size.width * this.widget.width,
-        decoration: BoxDecoration(
-          color: this.widget.color,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10,
+    return AnimatedContainer(
+      duration: Duration(
+        seconds: 1,
+      ),
+      width: mediaQuery.size.width * this.widget.widthScale,
+      height: mediaQuery.size.width * this.widget.widthScale,
+      decoration: BoxDecoration(
+        color: this.widget.color,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              this.widget.icon,
+              size: mediaQuery.size.width * this.widget.widthScale / 2.5,
+              color: widget.iconColor,
+            ),
+            Text(
+              this.widget.title,
+              style: TextStyle(
+                color: widget.textColor,
+                fontSize: mediaQuery.size.width * this.widget.widthScale / 10,
+              ),
             ),
           ],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                this.widget.icon,
-                size: 50,
-                color: widget.iconColor,
-              ),
-              Text(
-                this.widget.title,
-                style: TextStyle(
-                  color: widget.textColor,
-                  fontSize: 20,
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

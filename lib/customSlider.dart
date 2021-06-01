@@ -5,31 +5,39 @@ import 'widgets/sliderCard.dart';
 class CustomSlider extends StatefulWidget {
   final List<SliderCard> list;
   final MediaQueryData mediaQuery;
-  final double height;
-  CustomSlider({this.list, this.mediaQuery, this.height = 0.2});
+  final double heightScale, widthScale;
+  final AnimationController animationController;
+  CustomSlider({
+    this.list,
+    this.mediaQuery,
+    this.heightScale = 1,
+    this.widthScale = 1,
+    this.animationController,
+  });
   @override
   _CustomSliderState createState() => _CustomSliderState();
 }
 
 class _CustomSliderState extends State<CustomSlider> {
   List<Widget> items = [];
+  List<double> paddingList = [];
   int centerIndex;
-  double mainWidth = 200;
+  double mainWidth = 00;
   bool flag = true;
   @override
   void initState() {
-    mainWidth = double.parse(this.widget.list[0].width.toString());
+    mainWidth = double.parse(this.widget.list[0].widthScale.toString());
     for (int i = 0; i < widget.list.length; i++) {
       if (widget.list.length % 2 == 0) {
         //Even List Alignment
         centerIndex = int.parse(((widget.list.length) / 2).toStringAsFixed(0));
         if (i == centerIndex) {
           //Center Widget
-          items.add(AnimatedPositioned(
+          items.add(Positioned(
             child: widget.list[i],
             left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].width * widget.mediaQuery.size.width / 2,
-            duration: Duration(seconds: 3),
+                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            // duration: Duration(seconds: 3),
           ));
           setState(() {});
         } else {
@@ -41,14 +49,16 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthBelowCenter(i),
+              widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(AnimatedPositioned(
+            items.add(Positioned(
               child: widget.list[i],
               left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].width * widget.mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale *
+                          widget.mediaQuery.size.width /
+                          2) -
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              duration: Duration(seconds: 3),
+              // duration: Duration(seconds: 3),
             ));
             setState(() {});
           } else {
@@ -58,18 +68,18 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthAboveCenter(i),
+              widthScale: calculateWidthAboveCenter(i),
             );
             items.insert(
                 0,
-                AnimatedPositioned(
+                Positioned(
                   child: widget.list[i],
                   left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].width *
+                          widget.list[i].widthScale *
                               widget.mediaQuery.size.width /
                               2) +
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  duration: Duration(seconds: 3),
+                  // duration: Duration(seconds: 3),
                 ));
             setState(() {});
           }
@@ -80,11 +90,11 @@ class _CustomSliderState extends State<CustomSlider> {
             int.parse(((widget.list.length + 1) / 2).toStringAsFixed(0)) - 1;
         if (i == centerIndex) {
           //Center Widget
-          items.add(AnimatedPositioned(
+          items.add(Positioned(
             child: widget.list[i],
             left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].width * widget.mediaQuery.size.width / 2,
-            duration: Duration(seconds: 3),
+                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            // duration: Duration(seconds: 3),
           ));
           setState(() {});
         } else {
@@ -97,14 +107,16 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthBelowCenter(i),
+              widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(AnimatedPositioned(
+            items.add(Positioned(
               child: Center(child: widget.list[i]),
               left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].width * widget.mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale *
+                          widget.mediaQuery.size.width /
+                          2) -
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              duration: Duration(seconds: 3),
+              // duration: Duration(seconds: 3),
             ));
             setState(() {});
           } else {
@@ -114,18 +126,18 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthAboveCenter(i),
+              widthScale: calculateWidthAboveCenter(i),
             );
             items.insert(
                 0,
-                AnimatedPositioned(
+                Positioned(
                   child: widget.list[i],
                   left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].width *
+                          widget.list[i].widthScale *
                               widget.mediaQuery.size.width /
                               2) +
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  duration: Duration(seconds: 3),
+                  // duration: Duration(seconds: 3),
                 ));
             setState(() {});
           }
@@ -154,13 +166,13 @@ class _CustomSliderState extends State<CustomSlider> {
             iconColor: widget.list[i].iconColor,
             textColor: widget.list[i].textColor,
             title: widget.list[i].title,
-            width: mainWidth,
+            widthScale: mainWidth,
           );
-          items.add(AnimatedPositioned(
+          items.add(Positioned(
             child: widget.list[i],
             left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].width * widget.mediaQuery.size.width / 2,
-            duration: Duration(seconds: 3),
+                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            // duration: Duration(seconds: 3),
           ));
           setState(() {});
         } else {
@@ -172,14 +184,16 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthBelowCenter(i),
+              widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(AnimatedPositioned(
+            items.add(Positioned(
               child: widget.list[i],
               left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].width * widget.mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale *
+                          widget.mediaQuery.size.width /
+                          2) -
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              duration: Duration(seconds: 3),
+              // duration: Duration(seconds: 3),
             ));
             setState(() {});
           } else {
@@ -189,18 +203,18 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthAboveCenter(i),
+              widthScale: calculateWidthAboveCenter(i),
             );
             items.insert(
                 0,
-                AnimatedPositioned(
+                Positioned(
                   child: widget.list[i],
                   left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].width *
+                          widget.list[i].widthScale *
                               widget.mediaQuery.size.width /
                               2) +
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  duration: Duration(seconds: 3),
+                  // duration: Duration(seconds: 3),
                 ));
             setState(() {});
           }
@@ -215,13 +229,13 @@ class _CustomSliderState extends State<CustomSlider> {
             iconColor: widget.list[i].iconColor,
             textColor: widget.list[i].textColor,
             title: widget.list[i].title,
-            width: mainWidth,
+            widthScale: mainWidth,
           );
-          items.add(AnimatedPositioned(
+          items.add(Positioned(
             child: widget.list[i],
             left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].width * widget.mediaQuery.size.width / 2,
-            duration: Duration(seconds: 3),
+                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            // duration: Duration(seconds: 3),
           ));
           setState(() {});
         } else {
@@ -233,14 +247,16 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthBelowCenter(i),
+              widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(AnimatedPositioned(
+            items.add(Positioned(
               child: Center(child: widget.list[i]),
               left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].width * widget.mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale *
+                          widget.mediaQuery.size.width /
+                          2) -
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              duration: Duration(seconds: 3),
+              // duration: Duration(seconds: 3),
             ));
             setState(() {});
           } else {
@@ -250,18 +266,18 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthAboveCenter(i),
+              widthScale: calculateWidthAboveCenter(i),
             );
             items.insert(
                 0,
-                AnimatedPositioned(
+                Positioned(
                   child: widget.list[i],
                   left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].width *
+                          widget.list[i].widthScale *
                               widget.mediaQuery.size.width /
                               2) +
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  duration: Duration(seconds: 3),
+                  // duration: Duration(seconds: 3),
                 ));
             setState(() {});
           }
@@ -289,13 +305,13 @@ class _CustomSliderState extends State<CustomSlider> {
             iconColor: widget.list[i].iconColor,
             textColor: widget.list[i].textColor,
             title: widget.list[i].title,
-            width: mainWidth,
+            widthScale: mainWidth,
           );
-          items.add(AnimatedPositioned(
+          items.add(Positioned(
             child: widget.list[i],
             left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].width * widget.mediaQuery.size.width / 2,
-            duration: Duration(seconds: 3),
+                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            // duration: Duration(seconds: 3),
           ));
           setState(() {});
         } else {
@@ -307,14 +323,16 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthBelowCenter(i),
+              widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(AnimatedPositioned(
+            items.add(Positioned(
               child: widget.list[i],
               left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].width * widget.mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale *
+                          widget.mediaQuery.size.width /
+                          2) -
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              duration: Duration(seconds: 3),
+              // duration: Duration(seconds: 3),
             ));
             setState(() {});
           } else {
@@ -324,18 +342,18 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthAboveCenter(i),
+              widthScale: calculateWidthAboveCenter(i),
             );
             items.insert(
                 0,
-                AnimatedPositioned(
+                Positioned(
                   child: widget.list[i],
                   left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].width *
+                          widget.list[i].widthScale *
                               widget.mediaQuery.size.width /
                               2) +
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  duration: Duration(seconds: 3),
+                  // duration: Duration(seconds: 3),
                 ));
             setState(() {});
           }
@@ -350,13 +368,13 @@ class _CustomSliderState extends State<CustomSlider> {
             iconColor: widget.list[i].iconColor,
             textColor: widget.list[i].textColor,
             title: widget.list[i].title,
-            width: mainWidth,
+            widthScale: mainWidth,
           );
-          items.add(AnimatedPositioned(
+          items.add(Positioned(
             child: widget.list[i],
             left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].width * widget.mediaQuery.size.width / 2,
-            duration: Duration(seconds: 3),
+                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            // duration: Duration(seconds: 3),
           ));
           setState(() {});
         } else {
@@ -368,14 +386,16 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthBelowCenter(i),
+              widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(AnimatedPositioned(
+            items.add(Positioned(
               child: Center(child: widget.list[i]),
               left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].width * widget.mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale *
+                          widget.mediaQuery.size.width /
+                          2) -
                   (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              duration: Duration(seconds: 3),
+              // duration: Duration(seconds: 3),
             ));
             setState(() {});
           } else {
@@ -385,18 +405,18 @@ class _CustomSliderState extends State<CustomSlider> {
               iconColor: widget.list[i].iconColor,
               textColor: widget.list[i].textColor,
               title: widget.list[i].title,
-              width: calculateWidthAboveCenter(i),
+              widthScale: calculateWidthAboveCenter(i),
             );
             items.insert(
                 0,
-                AnimatedPositioned(
+                Positioned(
                   child: widget.list[i],
                   left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].width *
+                          widget.list[i].widthScale *
                               widget.mediaQuery.size.width /
                               2) +
                       (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  duration: Duration(seconds: 3),
+                  // duration: Duration(seconds: 3),
                 ));
             setState(() {});
           }
@@ -438,7 +458,8 @@ class _CustomSliderState extends State<CustomSlider> {
         print('${d.globalPosition.dx}');
       },
       child: Container(
-        width: mediaQuery.size.width,
+        width: mediaQuery.size.width * this.widget.widthScale,
+        height: mediaQuery.size.height * this.widget.heightScale,
         child: Stack(
           alignment: Alignment.center,
           children: items,
