@@ -1,139 +1,54 @@
-import 'package:flutter/material.dart';
-
-class SliderCard extends StatefulWidget {
-  final IconData icon;
-  final String title;
-  final Color color, textColor, iconColor;
-  final double widthScale;
-  SliderCard(
-      {@required this.icon,
-      @required this.color,
-      @required this.title,
-      @required this.textColor,
-      @required this.iconColor,
-      this.widthScale = 0.5});
-  @override
-  _SliderCardState createState() => _SliderCardState();
-}
-
-class _SliderCardState extends State<SliderCard> {
-  AnimationController _animationController;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-    return AnimatedContainer(
-      duration: Duration(
-        seconds: 1,
-      ),
-      width: mediaQuery.size.width * this.widget.widthScale,
-      height: mediaQuery.size.width * this.widget.widthScale,
-      decoration: BoxDecoration(
-        color: this.widget.color,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              this.widget.icon,
-              size: mediaQuery.size.width * this.widget.widthScale / 2.5,
-              color: widget.iconColor,
-            ),
-            Text(
-              this.widget.title,
-              style: TextStyle(
-                color: widget.textColor,
-                fontSize: mediaQuery.size.width * this.widget.widthScale / 10,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-//
 // import 'package:flutter/material.dart';
 // import 'package:flutter/physics.dart';
 //
-// main() {
-//   runApp(MaterialApp(home: PhysicsCardDragDemo()));
-// }
-//
-// class PhysicsCardDragDemo extends StatelessWidget {
+// class SliderCard extends StatefulWidget {
+//   final IconData icon;
+//   final String title;
+//   final Color color, textColor, iconColor;
+//   final double widthScale;
+//   final Offset panOffset;
+//   final MediaQueryData mediaQuery;
+//   final AnimationController animationController;
+//   SliderCard(
+//       {@required this.icon,
+//       @required this.color,
+//       @required this.title,
+//       @required this.textColor,
+//       @required this.iconColor,
+//       this.panOffset = const Offset(0.0, 0.0),
+//       this.mediaQuery,
+//       @required this.animationController,
+//       this.widthScale = 0.5});
 //   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: Stack(
-//         children: [
-//           DraggableCard(
-//             child: FlutterLogo(
-//               size: 128,
-//             ),
-//           ),
-//           DraggableCard(
-//             child: FlutterLogo(
-//               size: 128,
-//             ),
-//           ),
-//           DraggableCard(
-//             child: FlutterLogo(
-//               size: 128,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
+//   _SliderCardState createState() => _SliderCardState();
 // }
 //
-// /// A draggable card that moves back to [Alignment.center] when it's
-// /// released.
-// class DraggableCard extends StatefulWidget {
-//   final Widget child;
-//   DraggableCard({@required this.child});
-//
-//   @override
-//   _DraggableCardState createState() => _DraggableCardState();
-// }
-//
-// class _DraggableCardState extends State<DraggableCard>
-//     with SingleTickerProviderStateMixin {
-//   AnimationController _controller;
-//
-//   /// The alignment of the card as it is dragged or being animated.
-//   ///
-//   /// While the card is being dragged, this value is set to the values computed
-//   /// in the GestureDetector onPanUpdate callback. If the animation is running,
-//   /// this value is set to the value of the [_animation].
+// class _SliderCardState extends State<SliderCard> {
+//   AnimationController _animationController;
 //   Alignment _dragAlignment = Alignment.center;
-//
 //   Animation<Alignment> _animation;
+//
+//   @override
+//   void initState() {
+//     _animationController = widget.animationController;
+//     _dragAlignment = Alignment(widget.panOffset.dx, widget.panOffset.dy);
+//     super.initState();
+//     _animationController.addListener(() {
+//       setState(() {
+//         _dragAlignment = _animation.value;
+//       });
+//     });
+//   }
+//
+//   @override
+//   void dispose() {
+//     _animationController.dispose();
+//     super.dispose();
+//   }
 //
 //   /// Calculates and runs a [SpringSimulation].
 //   void _runAnimation(Offset pixelsPerSecond, Size size) {
-//     _animation = _controller.drive(
+//     _animation = _animationController.drive(
 //       AlignmentTween(
 //         begin: _dragAlignment,
 //         end: _dragAlignment,
@@ -154,51 +69,99 @@ class _SliderCardState extends State<SliderCard> {
 //
 //     final simulation = SpringSimulation(spring, 0, 1, -unitVelocity);
 //
-//     _controller.animateWith(simulation);TODO
-//   }
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = AnimationController(vsync: this);
-//
-//     _controller.addListener(() {
-//       setState(() {
-//         _dragAlignment = _animation.value;
-//       });
-//     });
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
+//     _animationController.animateWith(simulation);
 //   }
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     final size = MediaQuery.of(context).size;
+//     var mediaQuery = MediaQuery.of(context);
 //     return GestureDetector(
-//       onPanDown: (details) {
-//         _controller.stop();
+//       onPanEnd: (details) {
+//         _runAnimation(details.velocity.pixelsPerSecond, mediaQuery.size);
 //       },
 //       onPanUpdate: (details) {
 //         setState(() {
 //           _dragAlignment += Alignment(
-//             details.delta.dx / (size.width / 2),
-//             0.0, //details.delta.dy / (size.height / 2)
+//             details.delta.dx / (mediaQuery.size.width / 2),
+//             details.delta.dy / (mediaQuery.size.height / 2), //
 //           );
 //         });
 //       },
-//       onPanEnd: (details) {
-//         _runAnimation(details.velocity.pixelsPerSecond, size);
+//       onPanDown: (details) {
+//         _animationController.stop();
 //       },
-//       child: Align(
-//         alignment: _dragAlignment,
-//         child: Card(
-//           child: widget.child,
+//       child: AnimatedContainer(
+//         duration: Duration(
+//           seconds: 1,
+//         ),
+//         width: mediaQuery.size.width * this.widget.widthScale,
+//         height: mediaQuery.size.width * this.widget.widthScale,
+//         decoration: BoxDecoration(
+//           color: this.widget.color,
+//           borderRadius: BorderRadius.circular(20),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.grey,
+//               blurRadius: 10,
+//             ),
+//           ],
+//         ),
+//         child: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Icon(
+//                 this.widget.icon,
+//                 size: mediaQuery.size.width * this.widget.widthScale / 2.5,
+//                 color: widget.iconColor,
+//               ),
+//               Text(
+//                 this.widget.title,
+//                 style: TextStyle(
+//                   color: widget.textColor,
+//                   fontSize: mediaQuery.size.width * this.widget.widthScale / 10,
+//                 ),
+//               ),
+//             ],
+//           ),
 //         ),
 //       ),
 //     );
 //   }
 // }
+//
+// //
+//
+// //
+// // main() {
+// //   runApp(MaterialApp(home: PhysicsCardDragDemo()));
+// // }
+// //
+// // class PhysicsCardDragDemo extends StatelessWidget {
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Scaffold(
+// //       appBar: AppBar(),
+// //       body: Stack(
+// //         children: [
+// //           DraggableCard(
+// //             child: FlutterLogo(
+// //               size: 128,
+// //             ),
+// //           ),
+// //           DraggableCard(
+// //             child: FlutterLogo(
+// //               size: 128,
+// //             ),
+// //           ),
+// //           DraggableCard(
+// //             child: FlutterLogo(
+// //               size: 128,
+// //             ),
+// //           ),
+// //         ],
+// //       ),
+// //     );
+// //   }
+// // }
+// //

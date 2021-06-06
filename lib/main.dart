@@ -1,6 +1,7 @@
 import 'package:etisalat_app/customSlider.dart';
-import 'package:etisalat_app/widgets/sliderCard.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets/dragAbleCard.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +27,15 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+
+  @override
+  void initState() {
+    animationController = AnimationController(vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
@@ -38,64 +47,68 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Center(
           child: CustomSlider(
-            mediaQuery: mediaQuery,
             heightScale: 0.7,
+            animationController: animationController,
             list: [
-              SliderCard(
-                title: 'Home',
-                icon: Icons.home,
-                color: Colors.green,
-                iconColor: Colors.white,
-                textColor: Colors.white,
-                widthScale: 0.5,
-              ),
-              SliderCard(
+              DraggableCard(
                 title: 'Environment',
                 icon: Icons.eco,
                 color: Colors.amber,
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                widthScale: 0.5,
+                height: mediaQuery.size.width * 0.5,
+                animationController: animationController,
+                fontSize: 16,
               ),
-              SliderCard(
+              DraggableCard(
                 title: 'Exit',
                 icon: Icons.dangerous,
                 color: Colors.blue,
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                widthScale: 0.5,
+                height: mediaQuery.size.width * 0.5,
+                animationController: animationController,
+                fontSize: 16,
               ),
-              SliderCard(
-                title: 'Password',
-                icon: Icons.seven_k_plus,
-                color: Colors.red,
-                iconColor: Colors.white,
-                textColor: Colors.white,
-                widthScale: 0.5,
-              ),
-              SliderCard(
+              DraggableCard(
+                height: mediaQuery.size.width * 0.5,
                 title: 'Share',
                 icon: Icons.qr_code,
                 color: Colors.yellow,
                 textColor: Colors.black,
                 iconColor: Colors.black,
-                widthScale: 0.5,
+                fontSize: 16,
+                animationController: animationController,
               ),
-              SliderCard(
+              DraggableCard(
+                height: mediaQuery.size.width * 0.5,
                 title: 'Family',
                 icon: Icons.family_restroom_sharp,
                 color: Colors.pink,
                 textColor: Colors.black,
                 iconColor: Colors.black,
-                widthScale: 0.5,
+                fontSize: 16,
+                animationController: animationController,
               ),
-              SliderCard(
-                title: 'Computers',
-                icon: Icons.computer,
-                color: Colors.white,
+              DraggableCard(
+                height: mediaQuery.size.width * 0.5,
+                title: 'Family',
+                icon: Icons.family_restroom_sharp,
+                color: Colors.brown,
                 textColor: Colors.black,
                 iconColor: Colors.black,
-                widthScale: 0.5,
+                fontSize: 16,
+                animationController: animationController,
+              ),
+              DraggableCard(
+                height: mediaQuery.size.width * 0.5,
+                title: 'Family',
+                icon: Icons.family_restroom_sharp,
+                color: Colors.lightGreen,
+                textColor: Colors.black,
+                iconColor: Colors.black,
+                fontSize: 16,
+                animationController: animationController,
               ),
             ],
           ),
