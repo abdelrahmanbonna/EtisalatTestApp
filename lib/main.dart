@@ -29,6 +29,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Etisalat Demo'),
@@ -37,6 +38,7 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Center(
           child: CustomSlider(
+            mediaQuery: mediaQuery,
             heightScale: 0.7,
             list: [
               SliderCard(
