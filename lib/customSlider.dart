@@ -4,12 +4,12 @@ import 'widgets/sliderCard.dart';
 
 class CustomSlider extends StatefulWidget {
   final List<SliderCard> list;
-  final MediaQueryData mediaQuery;
+  // final MediaQueryData mediaQuery=MediaQuery.of(context);
   final double heightScale, widthScale;
   final AnimationController animationController;
   CustomSlider({
     this.list,
-    this.mediaQuery,
+    // this.mediaQuery,
     this.heightScale = 1,
     this.widthScale = 1,
     this.animationController,
@@ -18,7 +18,8 @@ class CustomSlider extends StatefulWidget {
   _CustomSliderState createState() => _CustomSliderState();
 }
 
-class _CustomSliderState extends State<CustomSlider> {
+class _CustomSliderState extends State<CustomSlider>
+    with SingleTickerProviderStateMixin {
   List<Widget> items = [];
   List<double> paddingList = [];
   int centerIndex;
@@ -26,6 +27,7 @@ class _CustomSliderState extends State<CustomSlider> {
   bool flag = true;
   @override
   void initState() {
+    var mediaQuery = MediaQuery.of(context);
     mainWidth = double.parse(this.widget.list[0].widthScale.toString());
     for (int i = 0; i < widget.list.length; i++) {
       if (widget.list.length % 2 == 0) {
@@ -35,8 +37,8 @@ class _CustomSliderState extends State<CustomSlider> {
           //Center Widget
           items.add(Positioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            left: (mediaQuery.size.width / 2) -
+                widget.list[i].widthScale * mediaQuery.size.width / 2,
             // duration: Duration(seconds: 3),
           ));
           setState(() {});
@@ -53,11 +55,9 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.add(Positioned(
               child: widget.list[i],
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
+              left: ((mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale * mediaQuery.size.width / 2) -
+                  (centerIndex - i) * mediaQuery.size.width * 0.2,
               // duration: Duration(seconds: 3),
             ));
             setState(() {});
@@ -74,11 +74,11 @@ class _CustomSliderState extends State<CustomSlider> {
                 0,
                 Positioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
+                  left: ((mediaQuery.size.width / 2) -
                           widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
+                              mediaQuery.size.width /
                               2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
+                      (i - centerIndex) * mediaQuery.size.width * 0.2,
                   // duration: Duration(seconds: 3),
                 ));
             setState(() {});
@@ -92,8 +92,8 @@ class _CustomSliderState extends State<CustomSlider> {
           //Center Widget
           items.add(Positioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            left: (mediaQuery.size.width / 2) -
+                widget.list[i].widthScale * mediaQuery.size.width / 2,
             // duration: Duration(seconds: 3),
           ));
           setState(() {});
@@ -111,11 +111,9 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.add(Positioned(
               child: Center(child: widget.list[i]),
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
+              left: ((mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale * mediaQuery.size.width / 2) -
+                  (centerIndex - i) * mediaQuery.size.width * 0.2,
               // duration: Duration(seconds: 3),
             ));
             setState(() {});
@@ -132,11 +130,11 @@ class _CustomSliderState extends State<CustomSlider> {
                 0,
                 Positioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
+                  left: ((mediaQuery.size.width / 2) -
                           widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
+                              mediaQuery.size.width /
                               2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
+                      (i - centerIndex) * mediaQuery.size.width * 0.2,
                   // duration: Duration(seconds: 3),
                 ));
             setState(() {});
@@ -150,6 +148,7 @@ class _CustomSliderState extends State<CustomSlider> {
   scrollStack() {
     items = [];
     setState(() {});
+    var mediaQuery = MediaQuery.of(context);
     var lastItem = widget.list[widget.list.length - 1];
     for (int i = widget.list.length - 1; i > 0; i--) {
       widget.list[i] = widget.list[i - 1];
@@ -170,8 +169,8 @@ class _CustomSliderState extends State<CustomSlider> {
           );
           items.add(Positioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            left: (mediaQuery.size.width / 2) -
+                widget.list[i].widthScale * mediaQuery.size.width / 2,
             // duration: Duration(seconds: 3),
           ));
           setState(() {});
@@ -188,11 +187,9 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.add(Positioned(
               child: widget.list[i],
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
+              left: ((mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale * mediaQuery.size.width / 2) -
+                  (centerIndex - i) * mediaQuery.size.width * 0.2,
               // duration: Duration(seconds: 3),
             ));
             setState(() {});
@@ -209,11 +206,11 @@ class _CustomSliderState extends State<CustomSlider> {
                 0,
                 Positioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
+                  left: ((mediaQuery.size.width / 2) -
                           widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
+                              mediaQuery.size.width /
                               2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
+                      (i - centerIndex) * mediaQuery.size.width * 0.2,
                   // duration: Duration(seconds: 3),
                 ));
             setState(() {});
@@ -233,8 +230,8 @@ class _CustomSliderState extends State<CustomSlider> {
           );
           items.add(Positioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            left: (mediaQuery.size.width / 2) -
+                widget.list[i].widthScale * mediaQuery.size.width / 2,
             // duration: Duration(seconds: 3),
           ));
           setState(() {});
@@ -251,11 +248,9 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.add(Positioned(
               child: Center(child: widget.list[i]),
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
+              left: ((mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale * mediaQuery.size.width / 2) -
+                  (centerIndex - i) * mediaQuery.size.width * 0.2,
               // duration: Duration(seconds: 3),
             ));
             setState(() {});
@@ -272,11 +267,11 @@ class _CustomSliderState extends State<CustomSlider> {
                 0,
                 Positioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
+                  left: ((mediaQuery.size.width / 2) -
                           widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
+                              mediaQuery.size.width /
                               2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
+                      (i - centerIndex) * mediaQuery.size.width * 0.2,
                   // duration: Duration(seconds: 3),
                 ));
             setState(() {});
@@ -289,6 +284,8 @@ class _CustomSliderState extends State<CustomSlider> {
   scrollStackReverse() {
     items = [];
     setState(() {});
+    var mediaQuery = MediaQuery.of(context);
+
     var firstItem = widget.list[0];
     for (int i = 0; i < widget.list.length - 1; i++) {
       widget.list[i] = widget.list[i + 1];
@@ -309,8 +306,8 @@ class _CustomSliderState extends State<CustomSlider> {
           );
           items.add(Positioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            left: (mediaQuery.size.width / 2) -
+                widget.list[i].widthScale * mediaQuery.size.width / 2,
             // duration: Duration(seconds: 3),
           ));
           setState(() {});
@@ -327,11 +324,9 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.add(Positioned(
               child: widget.list[i],
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
+              left: ((mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale * mediaQuery.size.width / 2) -
+                  (centerIndex - i) * mediaQuery.size.width * 0.2,
               // duration: Duration(seconds: 3),
             ));
             setState(() {});
@@ -348,11 +343,11 @@ class _CustomSliderState extends State<CustomSlider> {
                 0,
                 Positioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
+                  left: ((mediaQuery.size.width / 2) -
                           widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
+                              mediaQuery.size.width /
                               2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
+                      (i - centerIndex) * mediaQuery.size.width * 0.2,
                   // duration: Duration(seconds: 3),
                 ));
             setState(() {});
@@ -372,8 +367,8 @@ class _CustomSliderState extends State<CustomSlider> {
           );
           items.add(Positioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
+            left: (mediaQuery.size.width / 2) -
+                widget.list[i].widthScale * mediaQuery.size.width / 2,
             // duration: Duration(seconds: 3),
           ));
           setState(() {});
@@ -390,11 +385,9 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.add(Positioned(
               child: Center(child: widget.list[i]),
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
+              left: ((mediaQuery.size.width / 2) -
+                      widget.list[i].widthScale * mediaQuery.size.width / 2) -
+                  (centerIndex - i) * mediaQuery.size.width * 0.2,
               // duration: Duration(seconds: 3),
             ));
             setState(() {});
@@ -411,11 +404,11 @@ class _CustomSliderState extends State<CustomSlider> {
                 0,
                 Positioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
+                  left: ((mediaQuery.size.width / 2) -
                           widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
+                              mediaQuery.size.width /
                               2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
+                      (i - centerIndex) * mediaQuery.size.width * 0.2,
                   // duration: Duration(seconds: 3),
                 ));
             setState(() {});
