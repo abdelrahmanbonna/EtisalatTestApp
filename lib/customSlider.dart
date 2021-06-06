@@ -32,7 +32,7 @@ class _CustomSliderState extends State<CustomSlider> {
       if (widget.list.length % 2 == 0) {
         //Even List Alignment
         centerIndex = int.parse(((widget.list.length) / 2).toStringAsFixed(0));
-        var leftOffsetSpace = 1.0 / (centerIndex);
+        var leftOffsetSpace = 1.0 / (centerIndex + 1);
         var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
         if (i == centerIndex) {
           //Center Widget
@@ -66,9 +66,9 @@ class _CustomSliderState extends State<CustomSlider> {
               offset: Offset(
                   i == 0
                       ? -1.0
-                      : ((centerIndex) - i) * -leftOffsetSpace < 0
-                          ? ((centerIndex) - i) * -leftOffsetSpace
-                          : (((centerIndex) - i) * -leftOffsetSpace) * -1,
+                      : ((centerIndex + 1) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex + 1) - i) * -leftOffsetSpace
+                          : (((centerIndex + 1) - i) * -leftOffsetSpace) * -1,
                   0.0),
             );
             items.add(widget.list[i]);
@@ -107,7 +107,7 @@ class _CustomSliderState extends State<CustomSlider> {
         //ODD list Alignment
         centerIndex =
             int.parse(((widget.list.length + 1) / 2).toStringAsFixed(0)) - 1;
-        var leftOffsetSpace = -1.0 / (centerIndex);
+        var leftOffsetSpace = -1.0 / (centerIndex + 1);
         var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
         if (i == centerIndex) {
           //Center Widget
@@ -141,9 +141,9 @@ class _CustomSliderState extends State<CustomSlider> {
               offset: Offset(
                   i == 0
                       ? -1.0
-                      : ((centerIndex) - i) * -leftOffsetSpace < 0
-                          ? ((centerIndex) - i) * -leftOffsetSpace
-                          : (((centerIndex) - i) * -leftOffsetSpace) * -1,
+                      : ((centerIndex + 1) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex + 1) - i) * -leftOffsetSpace
+                          : (((centerIndex + 1) - i) * -leftOffsetSpace) * -1,
                   0.0),
             );
             items.add(Center(child: widget.list[i]));
