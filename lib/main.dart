@@ -50,16 +50,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             heightScale: 0.7,
             animationController: animationController,
             list: [
-              DraggableCard(
-                title: 'Environment',
-                icon: Icons.eco,
-                color: Colors.amber,
-                iconColor: Colors.white,
-                textColor: Colors.white,
-                height: mediaQuery.size.width * 0.5,
-                animationController: animationController,
-                fontSize: 16,
-              ),
+              // DraggableCard(
+              //   title: 'Environment',
+              //   icon: Icons.eco,
+              //   color: Colors.amber,
+              //   iconColor: Colors.white,
+              //   textColor: Colors.white,
+              //   height: mediaQuery.size.width * 0.5,
+              //   animationController: animationController,
+              //   fontSize: 16,
+              // ),
               DraggableCard(
                 title: 'Exit',
                 icon: Icons.dangerous,

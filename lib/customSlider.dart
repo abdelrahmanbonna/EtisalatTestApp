@@ -32,8 +32,8 @@ class _CustomSliderState extends State<CustomSlider> {
       if (widget.list.length % 2 == 0) {
         //Even List Alignment
         centerIndex = int.parse(((widget.list.length) / 2).toStringAsFixed(0));
-        var leftOffsetSpace = 1.5 / centerIndex;
-        var rightOffsetSpace = 1.5 / (widget.list.length - centerIndex);
+        var leftOffsetSpace = 1.0 / centerIndex;
+        var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
         if (i == centerIndex) {
           //Center Widget
           widget.list[i] = DraggableCard(
@@ -62,7 +62,7 @@ class _CustomSliderState extends State<CustomSlider> {
               height: calculateWidthBelowCenter(i),
               fontSize: widget.list[i].fontSize,
               offset: Offset(
-                  i == 0 ? -1.5 : (centerIndex - i) * -rightOffsetSpace, 0.0),
+                  i == 0 ? -1.0 : (centerIndex - i) * -leftOffsetSpace, 0.0),
             );
             items.add(widget.list[i]);
             setState(() {});
@@ -78,10 +78,18 @@ class _CustomSliderState extends State<CustomSlider> {
               fontSize: widget.list[i].fontSize,
               offset: Offset(
                   i == widget.list.length - 1
-                      ? 1.5
+                      ? 1.0
                       : ((widget.list.length - centerIndex) -
-                              (i - centerIndex)) *
-                          leftOffsetSpace,
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace >
+                              0
+                          ? ((widget.list.length - centerIndex) -
+                                  (i - centerIndex)) *
+                              rightOffsetSpace
+                          : -1 *
+                              (((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace),
                   0.0),
             );
             items.insert(0, widget.list[i]);
@@ -92,8 +100,8 @@ class _CustomSliderState extends State<CustomSlider> {
         //ODD list Alignment
         centerIndex =
             int.parse(((widget.list.length + 1) / 2).toStringAsFixed(0)) - 1;
-        var leftOffsetSpace = -1.5 / centerIndex;
-        var rightOffsetSpace = 1.5 / (widget.list.length - centerIndex);
+        var leftOffsetSpace = -1.0 / centerIndex;
+        var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
         if (i == centerIndex) {
           //Center Widget
           widget.list[i] = DraggableCard(
@@ -123,7 +131,7 @@ class _CustomSliderState extends State<CustomSlider> {
               height: calculateWidthBelowCenter(i),
               fontSize: widget.list[i].fontSize,
               offset: Offset(
-                  i == 0 ? -1.5 : (centerIndex - i) * -rightOffsetSpace, 0.0),
+                  i == 0 ? -1.0 : (centerIndex - i) * -leftOffsetSpace, 0.0),
             );
             items.add(Center(child: widget.list[i]));
             setState(() {});
@@ -139,10 +147,18 @@ class _CustomSliderState extends State<CustomSlider> {
               fontSize: widget.list[i].fontSize,
               offset: Offset(
                   i == widget.list.length - 1
-                      ? 1.5
+                      ? 1.0
                       : ((widget.list.length - centerIndex) -
-                              (i - centerIndex)) *
-                          leftOffsetSpace,
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace >
+                              0
+                          ? ((widget.list.length - centerIndex) -
+                                  (i - centerIndex)) *
+                              rightOffsetSpace
+                          : -1 *
+                              (((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace),
                   0.0),
             );
             items.insert(0, widget.list[i]);
@@ -152,7 +168,6 @@ class _CustomSliderState extends State<CustomSlider> {
       }
     }
 
-    // items = widget.list;
     super.initState();
   }
 
