@@ -32,7 +32,7 @@ class _CustomSliderState extends State<CustomSlider> {
       if (widget.list.length % 2 == 0) {
         //Even List Alignment
         centerIndex = int.parse(((widget.list.length) / 2).toStringAsFixed(0));
-        var leftOffsetSpace = 1.0 / centerIndex;
+        var leftOffsetSpace = 1.0 / (centerIndex);
         var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
         if (i == centerIndex) {
           //Center Widget
@@ -51,7 +51,9 @@ class _CustomSliderState extends State<CustomSlider> {
           setState(() {});
         } else {
           //Other Widgets
+
           if (i < centerIndex) {
+            print('$leftOffsetSpace $centerIndex');
             widget.list[i] = DraggableCard(
               icon: widget.list[i].icon,
               color: widget.list[i].color,
@@ -62,7 +64,12 @@ class _CustomSliderState extends State<CustomSlider> {
               height: calculateWidthBelowCenter(i),
               fontSize: widget.list[i].fontSize,
               offset: Offset(
-                  i == 0 ? -1.0 : (centerIndex - i) * -leftOffsetSpace, 0.0),
+                  i == 0
+                      ? -1.0
+                      : ((centerIndex) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex) - i) * -leftOffsetSpace
+                          : (((centerIndex) - i) * -leftOffsetSpace) * -1,
+                  0.0),
             );
             items.add(widget.list[i]);
             setState(() {});
@@ -100,7 +107,7 @@ class _CustomSliderState extends State<CustomSlider> {
         //ODD list Alignment
         centerIndex =
             int.parse(((widget.list.length + 1) / 2).toStringAsFixed(0)) - 1;
-        var leftOffsetSpace = -1.0 / centerIndex;
+        var leftOffsetSpace = -1.0 / (centerIndex);
         var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
         if (i == centerIndex) {
           //Center Widget
@@ -121,6 +128,7 @@ class _CustomSliderState extends State<CustomSlider> {
           //Other Widgets
 
           if (i < centerIndex) {
+            print('$leftOffsetSpace $centerIndex');
             widget.list[i] = DraggableCard(
               icon: widget.list[i].icon,
               color: widget.list[i].color,
@@ -131,7 +139,12 @@ class _CustomSliderState extends State<CustomSlider> {
               height: calculateWidthBelowCenter(i),
               fontSize: widget.list[i].fontSize,
               offset: Offset(
-                  i == 0 ? -1.0 : (centerIndex - i) * -leftOffsetSpace, 0.0),
+                  i == 0
+                      ? -1.0
+                      : ((centerIndex) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex) - i) * -leftOffsetSpace
+                          : (((centerIndex) - i) * -leftOffsetSpace) * -1,
+                  0.0),
             );
             items.add(Center(child: widget.list[i]));
             setState(() {});
