@@ -6,13 +6,13 @@ class CustomSlider extends StatefulWidget {
   final List<SliderCard> list;
   final MediaQueryData mediaQuery;
   final double heightScale, widthScale;
-  final AnimationController animationController;
+  // final AnimationController animationController;
   CustomSlider({
     this.list,
     this.mediaQuery,
     this.heightScale = 1,
     this.widthScale = 1,
-    this.animationController,
+    // this.animationController,
   });
   @override
   _CustomSliderState createState() => _CustomSliderState();
@@ -172,10 +172,13 @@ class _CustomSliderState extends State<CustomSlider> {
     items = [];
     setState(() {});
     var lastItem = widget.list[widget.list.length - 1];
+    var lastPadding = paddingList[widget.list.length - 1];
     for (int i = widget.list.length - 1; i > 0; i--) {
       widget.list[i] = widget.list[i - 1];
+      paddingList[i] = paddingList[i - 1];
     }
     widget.list[0] = lastItem;
+    paddingList[0] = lastPadding;
     for (int i = 0; i < widget.list.length; i++) {
       if (widget.list.length % 2 == 0) {
         //Even List Alignment
@@ -294,10 +297,13 @@ class _CustomSliderState extends State<CustomSlider> {
     items = [];
     setState(() {});
     var firstItem = widget.list[0];
+    var firstPadding = paddingList[0];
     for (int i = 0; i < widget.list.length - 1; i++) {
       widget.list[i] = widget.list[i + 1];
+      paddingList[i] = paddingList[i + 1];
     }
     widget.list[widget.list.length - 1] = firstItem;
+    paddingList[widget.list.length - 1] = firstPadding;
     for (int i = 0; i < widget.list.length; i++) {
       if (widget.list.length % 2 == 0) {
         //Even List Alignment
@@ -436,10 +442,10 @@ class _CustomSliderState extends State<CustomSlider> {
     return GestureDetector(
       onHorizontalDragEnd: (d) {
         print('vel: ${d.primaryVelocity}');
-        if (d.primaryVelocity < 0) {
-          scrollStackReverse();
-        } else if (d.primaryVelocity > 0) {
+        if (d.primaryVelocity > 0) {
           scrollStack();
+        } else if (d.primaryVelocity < 0) {
+          scrollStackReverse();
         }
       },
       onHorizontalDragUpdate: (d) {
