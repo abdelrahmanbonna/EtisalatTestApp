@@ -38,10 +38,10 @@ class _SliderCardState extends State<SliderCard>
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
-    return AnimatedContainer(
-      duration: Duration(
-        seconds: 1,
-      ),
+    return Container(
+      // duration: Duration(
+      //   seconds: 1,
+      // ),
       width: mediaQuery.size.width * this.widget.widthScale,
       height: mediaQuery.size.width * this.widget.widthScale,
       decoration: BoxDecoration(

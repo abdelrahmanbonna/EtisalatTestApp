@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Etisalat Demo'),
+        backgroundColor: Colors.lightGreen,
       ),
       body: SafeArea(
         child: Center(
@@ -46,7 +47,7 @@ class _HomeState extends State<Home> {
                 color: Colors.green,
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                widthScale: 0.3,
+                widthScale: 0.5,
               ),
               SliderCard(
                 title: 'Environment',
@@ -54,7 +55,7 @@ class _HomeState extends State<Home> {
                 color: Colors.amber,
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                widthScale: 0.3,
+                widthScale: 0.5,
               ),
               SliderCard(
                 title: 'Exit',
@@ -62,7 +63,7 @@ class _HomeState extends State<Home> {
                 color: Colors.blue,
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                widthScale: 0.3,
+                widthScale: 0.5,
               ),
               SliderCard(
                 title: 'Password',
@@ -70,7 +71,7 @@ class _HomeState extends State<Home> {
                 color: Colors.red,
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                widthScale: 0.3,
+                widthScale: 0.5,
               ),
               SliderCard(
                 title: 'Share',
@@ -78,7 +79,7 @@ class _HomeState extends State<Home> {
                 color: Colors.yellow,
                 textColor: Colors.black,
                 iconColor: Colors.black,
-                widthScale: 0.3,
+                widthScale: 0.5,
               ),
               SliderCard(
                 title: 'Family',
@@ -86,7 +87,7 @@ class _HomeState extends State<Home> {
                 color: Colors.pink,
                 textColor: Colors.black,
                 iconColor: Colors.black,
-                widthScale: 0.3,
+                widthScale: 0.5,
               ),
               SliderCard(
                 title: 'Computers',
@@ -94,7 +95,7 @@ class _HomeState extends State<Home> {
                 color: Colors.white,
                 textColor: Colors.black,
                 iconColor: Colors.black,
-                widthScale: 0.2,
+                widthScale: 0.5,
               ),
             ],
           ),

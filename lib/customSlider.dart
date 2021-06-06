@@ -32,12 +32,15 @@ class _CustomSliderState extends State<CustomSlider> {
         //Even List Alignment
         centerIndex = int.parse(((widget.list.length) / 2).toStringAsFixed(0));
         if (i == centerIndex) {
+          paddingList.insert(
+              i,
+              (widget.mediaQuery.size.width / 2) -
+                  widget.list[i].widthScale * widget.mediaQuery.size.width / 2);
           //Center Widget
-          items.add(Positioned(
+          items.add(AnimatedPositioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
-            // duration: Duration(seconds: 3),
+            left: paddingList[i],
+            duration: Duration(seconds: 5),
           ));
           setState(() {});
         } else {
@@ -51,14 +54,17 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(Positioned(
+            paddingList.insert(
+                i,
+                ((widget.mediaQuery.size.width / 2) -
+                        widget.list[i].widthScale *
+                            widget.mediaQuery.size.width /
+                            2) -
+                    (centerIndex - i) * widget.mediaQuery.size.width * 0.2);
+            items.add(AnimatedPositioned(
               child: widget.list[i],
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              // duration: Duration(seconds: 3),
+              left: paddingList[i],
+              duration: Duration(seconds: 5),
             ));
             setState(() {});
           } else {
@@ -70,16 +76,19 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthAboveCenter(i),
             );
+            paddingList.insert(
+                i,
+                ((widget.mediaQuery.size.width / 2) -
+                        widget.list[i].widthScale *
+                            widget.mediaQuery.size.width /
+                            2) +
+                    (i - centerIndex) * widget.mediaQuery.size.width * 0.2);
             items.insert(
                 0,
-                Positioned(
+                AnimatedPositioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
-                              2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  // duration: Duration(seconds: 3),
+                  left: paddingList[i],
+                  duration: Duration(seconds: 5),
                 ));
             setState(() {});
           }
@@ -90,11 +99,14 @@ class _CustomSliderState extends State<CustomSlider> {
             int.parse(((widget.list.length + 1) / 2).toStringAsFixed(0)) - 1;
         if (i == centerIndex) {
           //Center Widget
-          items.add(Positioned(
+          paddingList.insert(
+              i,
+              (widget.mediaQuery.size.width / 2) -
+                  widget.list[i].widthScale * widget.mediaQuery.size.width / 2);
+          items.add(AnimatedPositioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
-            // duration: Duration(seconds: 3),
+            left: paddingList[i],
+            duration: Duration(seconds: 5),
           ));
           setState(() {});
         } else {
@@ -109,14 +121,17 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(Positioned(
+            paddingList.insert(
+                i,
+                ((widget.mediaQuery.size.width / 2) -
+                        widget.list[i].widthScale *
+                            widget.mediaQuery.size.width /
+                            2) -
+                    (centerIndex - i) * widget.mediaQuery.size.width * 0.2);
+            items.add(AnimatedPositioned(
               child: Center(child: widget.list[i]),
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              // duration: Duration(seconds: 3),
+              left: paddingList[i],
+              duration: Duration(seconds: 5),
             ));
             setState(() {});
           } else {
@@ -128,16 +143,19 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthAboveCenter(i),
             );
+            paddingList.insert(
+                i,
+                ((widget.mediaQuery.size.width / 2) -
+                        widget.list[i].widthScale *
+                            widget.mediaQuery.size.width /
+                            2) +
+                    (i - centerIndex) * widget.mediaQuery.size.width * 0.2);
             items.insert(
                 0,
-                Positioned(
+                AnimatedPositioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
-                              2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  // duration: Duration(seconds: 3),
+                  left: paddingList[i],
+                  duration: Duration(seconds: 5),
                 ));
             setState(() {});
           }
@@ -147,6 +165,9 @@ class _CustomSliderState extends State<CustomSlider> {
     super.initState();
   }
 
+  //Functions
+
+  //Scrolling in the direction to center
   scrollStack() {
     items = [];
     setState(() {});
@@ -168,11 +189,10 @@ class _CustomSliderState extends State<CustomSlider> {
             title: widget.list[i].title,
             widthScale: mainWidth,
           );
-          items.add(Positioned(
+          items.add(AnimatedPositioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
-            // duration: Duration(seconds: 3),
+            left: paddingList[i],
+            duration: Duration(seconds: 5),
           ));
           setState(() {});
         } else {
@@ -186,14 +206,10 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(Positioned(
+            items.add(AnimatedPositioned(
               child: widget.list[i],
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              // duration: Duration(seconds: 3),
+              left: paddingList[i],
+              duration: Duration(seconds: 5),
             ));
             setState(() {});
           } else {
@@ -207,14 +223,10 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.insert(
                 0,
-                Positioned(
+                AnimatedPositioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
-                              2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  // duration: Duration(seconds: 3),
+                  left: paddingList[i],
+                  duration: Duration(seconds: 5),
                 ));
             setState(() {});
           }
@@ -231,11 +243,10 @@ class _CustomSliderState extends State<CustomSlider> {
             title: widget.list[i].title,
             widthScale: mainWidth,
           );
-          items.add(Positioned(
+          items.add(AnimatedPositioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
-            // duration: Duration(seconds: 3),
+            left: paddingList[i],
+            duration: Duration(seconds: 5),
           ));
           setState(() {});
         } else {
@@ -249,14 +260,10 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(Positioned(
+            items.add(AnimatedPositioned(
               child: Center(child: widget.list[i]),
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              // duration: Duration(seconds: 3),
+              left: paddingList[i],
+              duration: Duration(seconds: 5),
             ));
             setState(() {});
           } else {
@@ -270,14 +277,10 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.insert(
                 0,
-                Positioned(
+                AnimatedPositioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
-                              2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  // duration: Duration(seconds: 3),
+                  left: paddingList[i],
+                  duration: Duration(seconds: 5),
                 ));
             setState(() {});
           }
@@ -286,6 +289,7 @@ class _CustomSliderState extends State<CustomSlider> {
     }
   }
 
+  //Scrolling in the direction from the center to the last item
   scrollStackReverse() {
     items = [];
     setState(() {});
@@ -307,11 +311,10 @@ class _CustomSliderState extends State<CustomSlider> {
             title: widget.list[i].title,
             widthScale: mainWidth,
           );
-          items.add(Positioned(
+          items.add(AnimatedPositioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
-            // duration: Duration(seconds: 3),
+            left: paddingList[i],
+            duration: Duration(seconds: 5),
           ));
           setState(() {});
         } else {
@@ -325,14 +328,10 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(Positioned(
+            items.add(AnimatedPositioned(
               child: widget.list[i],
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              // duration: Duration(seconds: 3),
+              left: paddingList[i],
+              duration: Duration(seconds: 3),
             ));
             setState(() {});
           } else {
@@ -346,14 +345,10 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.insert(
                 0,
-                Positioned(
+                AnimatedPositioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
-                              2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  // duration: Duration(seconds: 3),
+                  left: paddingList[i],
+                  duration: Duration(seconds: 5),
                 ));
             setState(() {});
           }
@@ -370,11 +365,10 @@ class _CustomSliderState extends State<CustomSlider> {
             title: widget.list[i].title,
             widthScale: mainWidth,
           );
-          items.add(Positioned(
+          items.add(AnimatedPositioned(
             child: widget.list[i],
-            left: (widget.mediaQuery.size.width / 2) -
-                widget.list[i].widthScale * widget.mediaQuery.size.width / 2,
-            // duration: Duration(seconds: 3),
+            left: paddingList[i],
+            duration: Duration(seconds: 5),
           ));
           setState(() {});
         } else {
@@ -388,14 +382,10 @@ class _CustomSliderState extends State<CustomSlider> {
               title: widget.list[i].title,
               widthScale: calculateWidthBelowCenter(i),
             );
-            items.add(Positioned(
+            items.add(AnimatedPositioned(
               child: Center(child: widget.list[i]),
-              left: ((widget.mediaQuery.size.width / 2) -
-                      widget.list[i].widthScale *
-                          widget.mediaQuery.size.width /
-                          2) -
-                  (centerIndex - i) * widget.mediaQuery.size.width * 0.2,
-              // duration: Duration(seconds: 3),
+              left: paddingList[i],
+              duration: Duration(seconds: 5),
             ));
             setState(() {});
           } else {
@@ -409,14 +399,10 @@ class _CustomSliderState extends State<CustomSlider> {
             );
             items.insert(
                 0,
-                Positioned(
+                AnimatedPositioned(
                   child: widget.list[i],
-                  left: ((widget.mediaQuery.size.width / 2) -
-                          widget.list[i].widthScale *
-                              widget.mediaQuery.size.width /
-                              2) +
-                      (i - centerIndex) * widget.mediaQuery.size.width * 0.2,
-                  // duration: Duration(seconds: 3),
+                  left: paddingList[i],
+                  duration: Duration(seconds: 5),
                 ));
             setState(() {});
           }
@@ -425,6 +411,7 @@ class _CustomSliderState extends State<CustomSlider> {
     }
   }
 
+  //Calculating Width of cards from first item to center
   double calculateWidthBelowCenter(index) {
     if (index == centerIndex) {
       return mainWidth;
@@ -433,6 +420,7 @@ class _CustomSliderState extends State<CustomSlider> {
     }
   }
 
+  //Calculating Width of cards from center to last item
   double calculateWidthAboveCenter(index) {
     if (index == centerIndex) {
       return mainWidth;
