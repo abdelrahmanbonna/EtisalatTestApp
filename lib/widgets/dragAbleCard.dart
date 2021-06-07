@@ -72,7 +72,8 @@ class _DraggableCardState extends State<DraggableCard>
     if (widget.offset != null)
       _dragAlignment = Alignment(widget.offset.dx, widget.offset.dy);
     super.initState();
-    _controller = AnimationController(vsync: this);
+    _controller = AnimationController(
+        vsync: this); //TODO find way to control animation from outside
     _controller.addListener(() {
       setState(() {
         _dragAlignment = _animation.value;
@@ -90,20 +91,20 @@ class _DraggableCardState extends State<DraggableCard>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onPanDown: (details) {
-        _controller.stop();
-      },
-      onPanUpdate: (details) {
-        setState(() {
-          _dragAlignment += Alignment(
-            details.delta.dx / (size.width / 2),
-            0.0, //details.delta.dy / (size.height / 2)
-          );
-        });
-      },
-      onPanEnd: (details) {
-        _runAnimation(details.velocity.pixelsPerSecond, size);
-      },
+      // onPanDown: (details) {
+      //   _controller.stop();
+      // },
+      // onPanUpdate: (details) {
+      //   setState(() {
+      //     _dragAlignment += Alignment(
+      //       details.delta.dx / (size.width / 2),
+      //       0.0, //details.delta.dy / (size.height / 2)
+      //     );
+      //   });
+      // },
+      // onPanEnd: (details) {
+      //   _runAnimation(details.velocity.pixelsPerSecond, size);
+      // },
       child: Align(
         alignment: _dragAlignment,
         child: AnimatedContainer(

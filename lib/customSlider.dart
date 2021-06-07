@@ -22,8 +22,6 @@ class _CustomSliderState extends State<CustomSlider> {
   List<double> paddingList = [];
   int centerIndex;
   double mainWidth = 00;
-  Offset pointer = Offset(0.0, 0.0);
-  bool flag = true;
 
   @override
   void initState() {
@@ -53,7 +51,7 @@ class _CustomSliderState extends State<CustomSlider> {
           //Other Widgets
 
           if (i < centerIndex) {
-            print('$leftOffsetSpace $centerIndex');
+            // print('$leftOffsetSpace $centerIndex');
             widget.list[i] = DraggableCard(
               icon: widget.list[i].icon,
               color: widget.list[i].color,
@@ -128,7 +126,7 @@ class _CustomSliderState extends State<CustomSlider> {
           //Other Widgets
 
           if (i < centerIndex) {
-            print('$leftOffsetSpace $centerIndex');
+            // print('$leftOffsetSpace $centerIndex');
             widget.list[i] = DraggableCard(
               icon: widget.list[i].icon,
               color: widget.list[i].color,
@@ -184,290 +182,332 @@ class _CustomSliderState extends State<CustomSlider> {
     super.initState();
   }
 
-  // scrollStack() {
-  //   items = [];
-  //   setState(() {});
-  //   var mediaQuery = widget.mediaQuery;
-  //   var lastItem = widget.list[widget.list.length - 1];
-  //   for (int i = widget.list.length - 1; i > 0; i--) {
-  //     widget.list[i] = widget.list[i - 1];
-  //   }
-  //   widget.list[0] = lastItem;
-  //   for (int i = 0; i < widget.list.length; i++) {
-  //     if (widget.list.length % 2 == 0) {
-  //       //Even List Alignment
-  //       if (i == centerIndex) {
-  //         //Center Widget
-  //         widget.list[i] = SliderCard(
-  //           icon: widget.list[i].icon,
-  //           color: widget.list[i].color,
-  //           iconColor: widget.list[i].iconColor,
-  //           textColor: widget.list[i].textColor,
-  //           title: widget.list[i].title,
-  //           animationController: this.widget.animationController,
-  //           widthScale: mainWidth,
-  //         );
-  //         items.add(Positioned(
-  //           child: widget.list[i],
-  //           left: (mediaQuery.size.width / 2) -
-  //               widget.list[i].widthScale * mediaQuery.size.width / 2,
-  //           // duration: Duration(seconds: 3),
-  //         ));
-  //         setState(() {});
-  //       } else {
-  //         //Other Widgets
-  //         if (i < centerIndex) {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthBelowCenter(i),
-  //           );
-  //           items.add(Positioned(
-  //             child: widget.list[i],
-  //             left: ((mediaQuery.size.width / 2) -
-  //                     widget.list[i].widthScale * mediaQuery.size.width / 2) -
-  //                 (centerIndex - i) * mediaQuery.size.width * 0.2,
-  //             // duration: Duration(seconds: 3),
-  //           ));
-  //           setState(() {});
-  //         } else {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthAboveCenter(i),
-  //           );
-  //           items.insert(
-  //               0,
-  //               Positioned(
-  //                 child: widget.list[i],
-  //                 left: ((mediaQuery.size.width / 2) -
-  //                         widget.list[i].widthScale *
-  //                             mediaQuery.size.width /
-  //                             2) +
-  //                     (i - centerIndex) * mediaQuery.size.width * 0.2,
-  //                 // duration: Duration(seconds: 3),
-  //               ));
-  //           setState(() {});
-  //         }
-  //       }
-  //     } else {
-  //       //ODD list Alignment
-  //       if (i == centerIndex) {
-  //         //Center Widget
-  //         widget.list[i] = SliderCard(
-  //           icon: widget.list[i].icon,
-  //           color: widget.list[i].color,
-  //           iconColor: widget.list[i].iconColor,
-  //           textColor: widget.list[i].textColor,
-  //           title: widget.list[i].title,
-  //           animationController: this.widget.animationController,
-  //           widthScale: mainWidth,
-  //         );
-  //         items.add(Positioned(
-  //           child: widget.list[i],
-  //           left: (mediaQuery.size.width / 2) -
-  //               widget.list[i].widthScale * mediaQuery.size.width / 2,
-  //           // duration: Duration(seconds: 3),
-  //         ));
-  //         setState(() {});
-  //       } else {
-  //         //Other Widgets
-  //         if (i < centerIndex) {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthBelowCenter(i),
-  //           );
-  //           items.add(Positioned(
-  //             child: Center(child: widget.list[i]),
-  //             left: ((mediaQuery.size.width / 2) -
-  //                     widget.list[i].widthScale * mediaQuery.size.width / 2) -
-  //                 (centerIndex - i) * mediaQuery.size.width * 0.2,
-  //             // duration: Duration(seconds: 3),
-  //           ));
-  //           setState(() {});
-  //         } else {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthAboveCenter(i),
-  //           );
-  //           items.insert(
-  //               0,
-  //               Positioned(
-  //                 child: widget.list[i],
-  //                 left: ((mediaQuery.size.width / 2) -
-  //                         widget.list[i].widthScale *
-  //                             mediaQuery.size.width /
-  //                             2) +
-  //                     (i - centerIndex) * mediaQuery.size.width * 0.2,
-  //                 // duration: Duration(seconds: 3),
-  //               ));
-  //           setState(() {});
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  //
-  // scrollStackReverse() {
-  //   items = [];
-  //   setState(() {});
-  //   var mediaQuery = widget.mediaQuery;
-  //
-  //   var firstItem = widget.list[0];
-  //   for (int i = 0; i < widget.list.length - 1; i++) {
-  //     widget.list[i] = widget.list[i + 1];
-  //   }
-  //   widget.list[widget.list.length - 1] = firstItem;
-  //   for (int i = 0; i < widget.list.length; i++) {
-  //     if (widget.list.length % 2 == 0) {
-  //       //Even List Alignment
-  //       if (i == centerIndex) {
-  //         //Center Widget
-  //         widget.list[i] = SliderCard(
-  //           icon: widget.list[i].icon,
-  //           color: widget.list[i].color,
-  //           iconColor: widget.list[i].iconColor,
-  //           textColor: widget.list[i].textColor,
-  //           title: widget.list[i].title,
-  //           animationController: this.widget.animationController,
-  //           widthScale: mainWidth,
-  //         );
-  //         items.add(Positioned(
-  //           child: widget.list[i],
-  //           left: (mediaQuery.size.width / 2) -
-  //               widget.list[i].widthScale * mediaQuery.size.width / 2,
-  //           // duration: Duration(seconds: 3),
-  //         ));
-  //         setState(() {});
-  //       } else {
-  //         //Other Widgets
-  //         if (i < centerIndex) {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthBelowCenter(i),
-  //           );
-  //           items.add(Positioned(
-  //             child: widget.list[i],
-  //             left: ((mediaQuery.size.width / 2) -
-  //                     widget.list[i].widthScale * mediaQuery.size.width / 2) -
-  //                 (centerIndex - i) * mediaQuery.size.width * 0.2,
-  //             // duration: Duration(seconds: 3),
-  //           ));
-  //           setState(() {});
-  //         } else {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthAboveCenter(i),
-  //           );
-  //           items.insert(
-  //               0,
-  //               Positioned(
-  //                 child: widget.list[i],
-  //                 left: ((mediaQuery.size.width / 2) -
-  //                         widget.list[i].widthScale *
-  //                             mediaQuery.size.width /
-  //                             2) +
-  //                     (i - centerIndex) * mediaQuery.size.width * 0.2,
-  //                 // duration: Duration(seconds: 3),
-  //               ));
-  //           setState(() {});
-  //         }
-  //       }
-  //     } else {
-  //       //ODD list Alignment
-  //       if (i == centerIndex) {
-  //         //Center Widget
-  //         widget.list[i] = SliderCard(
-  //           icon: widget.list[i].icon,
-  //           color: widget.list[i].color,
-  //           iconColor: widget.list[i].iconColor,
-  //           textColor: widget.list[i].textColor,
-  //           title: widget.list[i].title,
-  //           animationController: this.widget.animationController,
-  //           widthScale: mainWidth,
-  //         );
-  //         items.add(Positioned(
-  //           child: widget.list[i],
-  //           left: (mediaQuery.size.width / 2) -
-  //               widget.list[i].widthScale * mediaQuery.size.width / 2,
-  //           // duration: Duration(seconds: 3),
-  //         ));
-  //         setState(() {});
-  //       } else {
-  //         //Other Widgets
-  //         if (i < centerIndex) {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthBelowCenter(i),
-  //           );
-  //           items.add(Positioned(
-  //             child: Center(child: widget.list[i]),
-  //             left: ((mediaQuery.size.width / 2) -
-  //                     widget.list[i].widthScale * mediaQuery.size.width / 2) -
-  //                 (centerIndex - i) * mediaQuery.size.width * 0.2,
-  //             // duration: Duration(seconds: 3),
-  //           ));
-  //           setState(() {});
-  //         } else {
-  //           widget.list[i] = SliderCard(
-  //             icon: widget.list[i].icon,
-  //             color: widget.list[i].color,
-  //             iconColor: widget.list[i].iconColor,
-  //             textColor: widget.list[i].textColor,
-  //             title: widget.list[i].title,
-  //             animationController: this.widget.animationController,
-  //             widthScale: calculateWidthAboveCenter(i),
-  //           );
-  //           items.insert(
-  //               0,
-  //               Positioned(
-  //                 child: widget.list[i],
-  //                 left: ((mediaQuery.size.width / 2) -
-  //                         widget.list[i].widthScale *
-  //                             mediaQuery.size.width /
-  //                             2) +
-  //                     (i - centerIndex) * mediaQuery.size.width * 0.2,
-  //                 // duration: Duration(seconds: 3),
-  //               ));
-  //           setState(() {});
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  void scrollStack() {
+    items = [];
+    setState(() {});
+
+    var lastItem = widget.list[widget.list.length - 1];
+    for (int i = widget.list.length - 1; i > 0; i--) {
+      widget.list[i] = widget.list[i - 1];
+    }
+    widget.list[0] = lastItem;
+
+    for (int i = 0; i < widget.list.length; i++) {
+      if (widget.list.length % 2 == 0) {
+        //Even List Alignment
+        centerIndex = int.parse(((widget.list.length) / 2).toStringAsFixed(0));
+        var leftOffsetSpace = 1.0 / (centerIndex + 1);
+        var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
+        if (i == centerIndex) {
+          //Center Widget
+          widget.list[i] = DraggableCard(
+            icon: widget.list[i].icon,
+            color: widget.list[i].color,
+            iconColor: widget.list[i].iconColor,
+            textColor: widget.list[i].textColor,
+            title: widget.list[i].title,
+            animationController: this.widget.animationController,
+            height: calculateWidthBelowCenter(i),
+            fontSize: widget.list[i].fontSize,
+            offset: Offset(0.0, 0.0),
+          );
+          items.add(widget.list[i]);
+          setState(() {});
+        } else {
+          //Other Widgets
+
+          if (i < centerIndex) {
+            // print('$leftOffsetSpace $centerIndex');
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthBelowCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == 0
+                      ? -1.0
+                      : ((centerIndex + 1) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex + 1) - i) * -leftOffsetSpace
+                          : (((centerIndex + 1) - i) * -leftOffsetSpace) * -1,
+                  0.0),
+            );
+            items.add(widget.list[i]);
+            setState(() {});
+          } else {
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthAboveCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == widget.list.length - 1
+                      ? 1.0
+                      : ((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace >
+                              0
+                          ? ((widget.list.length - centerIndex) -
+                                  (i - centerIndex)) *
+                              rightOffsetSpace
+                          : -1 *
+                              (((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace),
+                  0.0),
+            );
+            items.insert(0, widget.list[i]);
+            setState(() {});
+          }
+        }
+      } else {
+        //ODD list Alignment
+        centerIndex =
+            int.parse(((widget.list.length + 1) / 2).toStringAsFixed(0)) - 1;
+        var leftOffsetSpace = -1.0 / (centerIndex + 1);
+        var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
+        if (i == centerIndex) {
+          //Center Widget
+          widget.list[i] = DraggableCard(
+            icon: widget.list[i].icon,
+            color: widget.list[i].color,
+            iconColor: widget.list[i].iconColor,
+            textColor: widget.list[i].textColor,
+            title: widget.list[i].title,
+            animationController: this.widget.animationController,
+            height: calculateWidthBelowCenter(i),
+            fontSize: widget.list[i].fontSize,
+            offset: Offset(0.0, 0.0),
+          );
+          items.add(widget.list[i]);
+          setState(() {});
+        } else {
+          //Other Widgets
+
+          if (i < centerIndex) {
+            // print('$leftOffsetSpace $centerIndex');
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthBelowCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == 0
+                      ? -1.0
+                      : ((centerIndex + 1) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex + 1) - i) * -leftOffsetSpace
+                          : (((centerIndex + 1) - i) * -leftOffsetSpace) * -1,
+                  0.0),
+            );
+            items.add(Center(child: widget.list[i]));
+            setState(() {});
+          } else {
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthAboveCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == widget.list.length - 1
+                      ? 1.0
+                      : ((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace >
+                              0
+                          ? ((widget.list.length - centerIndex) -
+                                  (i - centerIndex)) *
+                              rightOffsetSpace
+                          : -1 *
+                              (((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace),
+                  0.0),
+            );
+            items.insert(0, widget.list[i]);
+            setState(() {});
+          }
+        }
+      }
+    }
+  }
+
+  void scrollStackReverse() {
+    items = [];
+    setState(() {});
+    var firstItem = widget.list[0];
+    for (int i = 0; i < widget.list.length - 1; i++) {
+      widget.list[i] = widget.list[i + 1];
+    }
+    widget.list[widget.list.length - 1] = firstItem;
+
+    for (int i = 0; i < widget.list.length; i++) {
+      if (widget.list.length % 2 == 0) {
+        //Even List Alignment
+        centerIndex = int.parse(((widget.list.length) / 2).toStringAsFixed(0));
+        var leftOffsetSpace = 1.0 / (centerIndex + 1);
+        var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
+        if (i == centerIndex) {
+          //Center Widget
+          widget.list[i] = DraggableCard(
+            icon: widget.list[i].icon,
+            color: widget.list[i].color,
+            iconColor: widget.list[i].iconColor,
+            textColor: widget.list[i].textColor,
+            title: widget.list[i].title,
+            animationController: this.widget.animationController,
+            height: calculateWidthBelowCenter(i),
+            fontSize: widget.list[i].fontSize,
+            offset: Offset(0.0, 0.0),
+          );
+          items.add(widget.list[i]);
+          setState(() {});
+        } else {
+          //Other Widgets
+
+          if (i < centerIndex) {
+            // print('$leftOffsetSpace $centerIndex');
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthBelowCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == 0
+                      ? -1.0
+                      : ((centerIndex + 1) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex + 1) - i) * -leftOffsetSpace
+                          : (((centerIndex + 1) - i) * -leftOffsetSpace) * -1,
+                  0.0),
+            );
+            items.add(widget.list[i]);
+            setState(() {});
+          } else {
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthAboveCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == widget.list.length - 1
+                      ? 1.0
+                      : ((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace >
+                              0
+                          ? ((widget.list.length - centerIndex) -
+                                  (i - centerIndex)) *
+                              rightOffsetSpace
+                          : -1 *
+                              (((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace),
+                  0.0),
+            );
+            items.insert(0, widget.list[i]);
+            setState(() {});
+          }
+        }
+      } else {
+        //ODD list Alignment
+        centerIndex =
+            int.parse(((widget.list.length + 1) / 2).toStringAsFixed(0)) - 1;
+        var leftOffsetSpace = -1.0 / (centerIndex + 1);
+        var rightOffsetSpace = 1.0 / (widget.list.length - centerIndex);
+        if (i == centerIndex) {
+          //Center Widget
+          widget.list[i] = DraggableCard(
+            icon: widget.list[i].icon,
+            color: widget.list[i].color,
+            iconColor: widget.list[i].iconColor,
+            textColor: widget.list[i].textColor,
+            title: widget.list[i].title,
+            animationController: this.widget.animationController,
+            height: calculateWidthBelowCenter(i),
+            fontSize: widget.list[i].fontSize,
+            offset: Offset(0.0, 0.0),
+          );
+          items.add(widget.list[i]);
+          setState(() {});
+        } else {
+          //Other Widgets
+
+          if (i < centerIndex) {
+            // print('$leftOffsetSpace $centerIndex');
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthBelowCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == 0
+                      ? -1.0
+                      : ((centerIndex + 1) - i) * -leftOffsetSpace < 0
+                          ? ((centerIndex + 1) - i) * -leftOffsetSpace
+                          : (((centerIndex + 1) - i) * -leftOffsetSpace) * -1,
+                  0.0),
+            );
+            items.add(Center(child: widget.list[i]));
+            setState(() {});
+          } else {
+            widget.list[i] = DraggableCard(
+              icon: widget.list[i].icon,
+              color: widget.list[i].color,
+              iconColor: widget.list[i].iconColor,
+              textColor: widget.list[i].textColor,
+              title: widget.list[i].title,
+              animationController: this.widget.animationController,
+              height: calculateWidthAboveCenter(i),
+              fontSize: widget.list[i].fontSize,
+              offset: Offset(
+                  i == widget.list.length - 1
+                      ? 1.0
+                      : ((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace >
+                              0
+                          ? ((widget.list.length - centerIndex) -
+                                  (i - centerIndex)) *
+                              rightOffsetSpace
+                          : -1 *
+                              (((widget.list.length - centerIndex) -
+                                      (i - centerIndex)) *
+                                  rightOffsetSpace),
+                  0.0),
+            );
+            items.insert(0, widget.list[i]);
+            setState(() {});
+          }
+        }
+      }
+    }
+  }
 
   double calculateWidthBelowCenter(index) {
     if (index == centerIndex) {
@@ -489,6 +529,13 @@ class _CustomSliderState extends State<CustomSlider> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     return GestureDetector(
+      onHorizontalDragEnd: (d) {
+        if (d.velocity.pixelsPerSecond.dx > 0) {
+          scrollStack();
+        } else {
+          scrollStackReverse();
+        }
+      },
       child: Container(
         width: mediaQuery.size.width * this.widget.widthScale,
         height: mediaQuery.size.height * this.widget.heightScale,
