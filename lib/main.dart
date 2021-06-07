@@ -1,7 +1,7 @@
-import 'package:etisalat_app/customSlider.dart';
+import 'package:etisalat_app/widgets/card_item.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/dragAbleCard.dart';
+import 'horizontal_card_pager.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,6 +39,40 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
+
+    List<CardItem> items = [
+      MenuCardItem(
+        title: "Alarm",
+        icon: Icons.access_alarms,
+        iconSize: 60,
+      ),
+      MenuCardItem(
+        title: "Add",
+        icon: Icons.add,
+        iconSize: 60,
+      ),
+      MenuCardItem(
+        title: "Call",
+        icon: Icons.add_call,
+        iconSize: 60,
+      ),
+      MenuCardItem(
+        title: "WiFi",
+        icon: Icons.wifi,
+        iconSize: 60,
+      ),
+      MenuCardItem(
+        title: "File",
+        icon: Icons.attach_file,
+        iconSize: 60,
+      ),
+      MenuCardItem(
+        title: "Air Play",
+        icon: Icons.airplay,
+        iconSize: 60,
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Etisalat Demo'),
@@ -46,81 +80,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: SafeArea(
         child: Center(
-          child: CustomSlider(
-            heightScale: 0.7,
-            animationController: animationController,
-            list: [
-              DraggableCard(
-                title: 'Test',
-                icon: Icons.account_box,
-                color: Colors.yellowAccent,
-                iconColor: Colors.white,
-                textColor: Colors.white,
-                height: mediaQuery.size.width * 0.5,
-                animationController: animationController,
-                fontSize: 16,
-              ),
-              DraggableCard(
-                title: 'Environment',
-                icon: Icons.eco,
-                color: Colors.amber,
-                iconColor: Colors.white,
-                textColor: Colors.white,
-                height: mediaQuery.size.width * 0.5,
-                animationController: animationController,
-                fontSize: 16,
-              ),
-              DraggableCard(
-                title: 'Exit',
-                icon: Icons.dangerous,
-                color: Colors.blue,
-                iconColor: Colors.white,
-                textColor: Colors.white,
-                height: mediaQuery.size.width * 0.5,
-                animationController: animationController,
-                fontSize: 16,
-              ),
-              DraggableCard(
-                height: mediaQuery.size.width * 0.5,
-                title: 'Share',
-                icon: Icons.qr_code,
-                color: Colors.yellow,
-                textColor: Colors.black,
-                iconColor: Colors.black,
-                fontSize: 16,
-                animationController: animationController,
-              ),
-              DraggableCard(
-                height: mediaQuery.size.width * 0.5,
-                title: 'Family',
-                icon: Icons.family_restroom_sharp,
-                color: Colors.pink,
-                textColor: Colors.black,
-                iconColor: Colors.black,
-                fontSize: 16,
-                animationController: animationController,
-              ),
-              DraggableCard(
-                height: mediaQuery.size.width * 0.5,
-                title: 'Fast',
-                icon: Icons.fast_rewind_sharp,
-                color: Colors.brown,
-                textColor: Colors.black,
-                iconColor: Colors.black,
-                fontSize: 16,
-                animationController: animationController,
-              ),
-              DraggableCard(
-                height: mediaQuery.size.width * 0.5,
-                title: 'WIFI',
-                icon: Icons.network_wifi,
-                color: Colors.lightGreen,
-                textColor: Colors.black,
-                iconColor: Colors.black,
-                fontSize: 16,
-                animationController: animationController,
-              ),
-            ],
+          child: HorizontalCardPager(
+            onPageChanged: (page) => print("page : $page"),
+            onSelectedItem: (page) => print("selected : $page"),
+            items: items,
           ),
         ),
       ),
