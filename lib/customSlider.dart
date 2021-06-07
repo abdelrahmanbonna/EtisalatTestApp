@@ -442,9 +442,9 @@ class _CustomSliderState extends State<CustomSlider> {
     return GestureDetector(
       onHorizontalDragEnd: (d) {
         print('vel: ${d.primaryVelocity}');
-        if (d.primaryVelocity > 0) {
+        if (d.velocity.pixelsPerSecond.dx > 0) {
           scrollStack();
-        } else if (d.primaryVelocity < 0) {
+        } else if (d.velocity.pixelsPerSecond.dx < 0) {
           scrollStackReverse();
         }
       },
