@@ -20,7 +20,7 @@ class DraggableCard extends StatefulWidget {
     @required this.fontSize,
     @required this.textColor,
     @required this.iconColor,
-    this.offset,
+    this.offset = const Offset(0.0, 0.0),
     @required this.animationController,
   });
 
