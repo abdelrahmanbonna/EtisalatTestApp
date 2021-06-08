@@ -6,24 +6,24 @@ import 'widgets/card_item.dart';
 typedef PageChangedCallback = void Function(double page);
 typedef PageSelectedCallback = void Function(int index);
 
-class HorizontalCardPager extends StatefulWidget {
+class HorizontalCardCarousel extends StatefulWidget {
   final List<CardItem> items;
   final PageChangedCallback onPageChanged;
   final PageSelectedCallback onSelectedItem;
   // Set initial index
   final int initialPage;
 
-  HorizontalCardPager(
+  HorizontalCardCarousel(
       {this.items,
       this.onPageChanged,
       this.initialPage = 2,
       this.onSelectedItem});
 
   @override
-  _HorizontalCardPagerState createState() => _HorizontalCardPagerState();
+  _HorizontalCardCarouselState createState() => _HorizontalCardCarouselState();
 }
 
-class _HorizontalCardPagerState extends State<HorizontalCardPager> {
+class _HorizontalCardCarouselState extends State<HorizontalCardCarousel> {
   bool _isScrolling = false;
   double _currentPosition;
   PageController _controller;
@@ -50,7 +50,7 @@ class _HorizontalCardPagerState extends State<HorizontalCardPager> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       double viewWidth = constraints.maxWidth;
-      double viewHeight = viewWidth / 2; //TODO here is the sizes
+      double viewHeight = viewWidth * 0.5; //TODO here is the sizes
 
       double cardMaxWidth = viewHeight * 0.9;
       double cardMaxHeight = cardMaxWidth;
@@ -88,7 +88,7 @@ class _HorizontalCardPagerState extends State<HorizontalCardPager> {
             controller: _controller,
             viewWidth: viewWidth,
             selectedIndex: _currentPosition,
-            cardMaxHeight: cardMaxHeight,
+            cardMaxHeight: cardMaxHeight * 1.2,
             cardMaxWidth: cardMaxWidth,
           ));
     });
@@ -158,7 +158,6 @@ class _CardListWidgetState extends State<CardListWidget> {
       double cardHeight = cardWidth;
 
       Widget card = Positioned(
-          // textDirection: TextDirection.ltr,
           top: _getTopPositon(cardHeight, widget.cardMaxHeight),
           left: getCardLeftPadding(
               cardWidth,

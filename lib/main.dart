@@ -1,7 +1,8 @@
 import 'package:etisalat_app/widgets/card_item.dart';
+import 'package:etisalat_app/widgets/cards.dart';
 import 'package:flutter/material.dart';
 
-import 'horizontal_card_pager.dart';
+import 'horizontal_card_carousel.dart';
 
 void main() {
   runApp(MyApp());
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: SafeArea(
         child: Center(
-          child: HorizontalCardPager(
+          child: HorizontalCardCarousel(
             onPageChanged: (page) => print("page : $page"),
             onSelectedItem: (page) => print("selected : $page"),
             items: items,
