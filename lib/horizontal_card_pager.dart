@@ -50,9 +50,9 @@ class _HorizontalCardPagerState extends State<HorizontalCardPager> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       double viewWidth = constraints.maxWidth;
-      double viewHeight = viewWidth * 0.4; //TODO here is the sizes
+      double viewHeight = viewWidth / 2; //TODO here is the sizes
 
-      double cardMaxWidth = viewHeight;
+      double cardMaxWidth = viewHeight * 0.9;
       double cardMaxHeight = cardMaxWidth;
 
       return GestureDetector(
@@ -73,8 +73,7 @@ class _HorizontalCardPagerState extends State<HorizontalCardPager> {
 
               if (selectedIndex == 2) {
                 if (widget.onSelectedItem != null) {
-                  Future(
-                      () => widget.onSelectedItem(_currentPosition.round()));
+                  Future(() => widget.onSelectedItem(_currentPosition.round()));
                 }
               } else if (selectedIndex >= 0) {
                 int goToPage = _currentPosition.toInt() + selectedIndex - 2;
@@ -167,6 +166,8 @@ class _CardListWidgetState extends State<CardListWidget> {
         return basePosition - (cardMaxWidth * 1.1) * diffAbs;
       } else {
         return basePosition + (cardMaxWidth * 1.1) * diffAbs;
+
+        ///Cards get over cards
       }
     } else if (diffAbs > 1.0 && diffAbs < 2.0) {
       if (diff >= 0) {
@@ -300,9 +301,7 @@ double _getCardSize(double cardMaxWidth, int cardIndex, double selectedIndex) {
   if (diff >= 0.0 && diff < 1.0) {
     return cardMaxWidth - cardMaxWidth * (1 / 5) * ((diff - diff.floor()));
   } else if (diff >= 1.0 && diff < 2.0) {
-    return cardMaxWidth -
-        cardMaxWidth * (1 / 5) -
-        10 * ((diff - diff.floor()));
+    return cardMaxWidth - cardMaxWidth * (1 / 5) - 10 * ((diff - diff.floor()));
   } else if (diff >= 2.0 && diff < 3.0) {
     final size = cardMaxWidth -
         cardMaxWidth * (1 / 5) -

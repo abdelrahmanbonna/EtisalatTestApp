@@ -65,11 +65,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         title: "File",
         icon: Icons.attach_file,
         iconSize: 60,
+        color: Colors.amber,
+        textColor: Colors.black,
+        iconColor: Colors.black,
+        fontSize: 25,
       ),
       MenuCardItem(
         title: "Air Play",
         icon: Icons.airplay,
         iconSize: 60,
+        color: Colors.blueAccent,
       ),
     ];
 

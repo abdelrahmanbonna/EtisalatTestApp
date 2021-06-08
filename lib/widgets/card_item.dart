@@ -144,10 +144,13 @@ class MenuCardItem extends CardItem {
           children: [
             Flexible(
               flex: 2,
-              child: Icon(
-                this.icon,
-                size: iconSize,
-                color: iconColor,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Icon(
+                  this.icon,
+                  size: iconSize,
+                  color: iconColor,
+                ),
               ),
             ),
             Flexible(
