@@ -103,7 +103,7 @@ class _HorizontalCardPagerState extends State<HorizontalCardPager> {
     for (int i = 0; i < 5; i++) {
       double cardWidth = _getCardSize(cardMaxWidth, i, 2.0);
       double left =
-          _getStartPosition(cardWidth, cardMaxWidth, viewWidth, i, 2.0);
+          getCardLeftPadding(cardWidth, cardMaxWidth, viewWidth, i, 2.0);
 
       if (left <= dx && dx <= left + cardWidth) {
         return i;
@@ -147,45 +147,6 @@ class _CardListWidgetState extends State<CardListWidget> {
         selectedIndex = widget.controller.page;
       });
     });
-  }
-
-  //TODO edit to meet the video task
-  double getCardLeftPadding(double cardWidth, double cardMaxWidth,
-      double viewWidth, int cardIndex, double selectedIndex) {
-    double basePosition =
-        (viewWidth / 2) - (cardWidth / 2); //Center of the screen
-    double diff = (selectedIndex -
-        cardIndex); // Difference between selected index and current card index
-    double diffAbs = diff.abs(); // absolute value of the difference equ.
-
-    if (diffAbs == 0) {
-      return basePosition;
-    }
-    if (diffAbs > 0.0 && diffAbs <= 1.0) {
-      if (diff >= 0) {
-        return basePosition - (cardMaxWidth * 1.1) * diffAbs;
-      } else {
-        return basePosition + (cardMaxWidth * 1.1) * diffAbs;
-
-        ///Cards get over cards
-      }
-    } else if (diffAbs > 1.0 && diffAbs < 2.0) {
-      if (diff >= 0) {
-        return basePosition -
-            (cardMaxWidth * 1.1) -
-            cardMaxWidth * 0.9 * (diffAbs - diffAbs.floor()).abs();
-      } else {
-        return basePosition +
-            (cardMaxWidth * 1.1) +
-            cardMaxWidth * 0.9 * (diffAbs - diffAbs.floor()).abs();
-      }
-    } else {
-      if (diff >= 0) {
-        return basePosition - cardMaxWidth * 2;
-      } else {
-        return basePosition + cardMaxWidth * 2;
-      }
-    }
   }
 
   @override
@@ -259,13 +220,14 @@ double _getTopPositon(double cardHeigth, double viewHeight) {
   return (viewHeight - cardHeigth) / 2;
 }
 
-double _getStartPosition(double cardWidth, double cardMaxWidth,
+//TODO edit to meet the video task
+double getCardLeftPadding(double cardWidth, double cardMaxWidth,
     double viewWidth, int cardIndex, double selectedIndex) {
-  double diff = (selectedIndex - cardIndex);
-  double diffAbs = diff.abs();
-
   double basePosition =
       (viewWidth / 2) - (cardWidth / 2); //Center of the screen
+  double diff = (selectedIndex -
+      cardIndex); // Difference between selected index and current card index
+  double diffAbs = diff.abs(); // absolute value of the difference equ.
 
   if (diffAbs == 0) {
     return basePosition;
@@ -275,6 +237,8 @@ double _getStartPosition(double cardWidth, double cardMaxWidth,
       return basePosition - (cardMaxWidth * 1.1) * diffAbs;
     } else {
       return basePosition + (cardMaxWidth * 1.1) * diffAbs;
+
+      ///Cards get over cards
     }
   } else if (diffAbs > 1.0 && diffAbs < 2.0) {
     if (diff >= 0) {
