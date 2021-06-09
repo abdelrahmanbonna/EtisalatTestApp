@@ -5,13 +5,13 @@ import 'card_item.dart';
 class MenuCardItem extends CardItem {
   final IconData icon;
   final String title;
-  final Color color, textColor, iconColor;
+  final Color color, titleColor, iconColor;
   final double iconSize, fontSize;
   MenuCardItem({
     this.iconColor = Colors.white,
     @required this.icon,
     @required this.title,
-    this.textColor = Colors.white,
+    this.titleColor = Colors.white,
     this.fontSize = 16,
     this.iconSize = 20,
     this.color = Colors.lightGreen,
@@ -47,7 +47,7 @@ class MenuCardItem extends CardItem {
               child: Text(
                 this.title,
                 style: TextStyle(
-                  color: textColor,
+                  color: titleColor,
                   fontSize: fontSize,
                 ),
               ),

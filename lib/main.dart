@@ -39,8 +39,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-
     List<CardItem> items = [
       MenuCardItem(
         title: "Alarm",
@@ -51,6 +49,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         title: "Add",
         icon: Icons.add,
         iconSize: 60,
+        color: Colors.white,
+        titleColor: Colors.black,
+        iconColor: Colors.black,
       ),
       MenuCardItem(
         title: "Call",
@@ -61,13 +62,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         title: "WiFi",
         icon: Icons.wifi,
         iconSize: 60,
+        iconColor: Colors.deepPurpleAccent,
       ),
       MenuCardItem(
         title: "File",
         icon: Icons.attach_file,
         iconSize: 60,
         color: Colors.amber,
-        textColor: Colors.black,
+        titleColor: Colors.black,
         iconColor: Colors.black,
         fontSize: 25,
       ),

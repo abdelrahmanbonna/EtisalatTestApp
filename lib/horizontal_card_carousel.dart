@@ -159,12 +159,8 @@ class _CardListWidgetState extends State<CardListWidget> {
 
       Widget card = Positioned(
           top: _getTopPositon(cardHeight, widget.cardMaxHeight),
-          left: getCardLeftPadding(
-              cardWidth,
-              widget.cardMaxWidth,
-              widget.viewWidth,
-              i,
-              selectedIndex), //TODO change this to your layout
+          left: getCardLeftPadding(cardWidth, widget.cardMaxWidth,
+              widget.viewWidth, i, selectedIndex),
           child: Opacity(
             opacity: _getOpacity(i),
             child: Container(
